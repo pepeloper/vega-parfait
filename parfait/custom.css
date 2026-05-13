@@ -51,13 +51,13 @@
   overflow: clip !important;
 }
 
-#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-content {
+#tabbrowser-tabs[orient="vertical"][expanded] .tabbrowser-tab:not([pinned]) .tab-content {
   padding-inline-start: 14px !important;
   padding-inline-end: 12px !important;
   gap: 10px !important;
 }
 
-#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-icon-stack {
+#tabbrowser-tabs[orient="vertical"][expanded] .tabbrowser-tab:not([pinned]) .tab-icon-stack {
   margin-inline: 0 !important;
   padding-inline: 0 !important;
   min-width: 16px !important;
@@ -71,17 +71,41 @@
   z-index: 1;
 }
 
-#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-icon-image {
+#tabbrowser-tabs[orient="vertical"][expanded] .tabbrowser-tab:not([pinned]) .tab-icon-image {
   margin: 0 !important;
   inset: auto !important;
   transform: none !important;
 }
 
-#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+#tabbrowser-tabs[orient="vertical"][expanded] .tabbrowser-tab:not([pinned]) .tab-close-button {
   position: relative;
   inset: auto !important;
   transform: none !important;
   z-index: 1;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tabbrowser-tab:not([pinned]) .tab-icon-stack {
+  min-width: 16px !important;
+  width: 16px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tabbrowser-tab:not([pinned]) .tab-icon-image {
+  margin: 0 !important;
+  inset: auto !important;
+  transform: none !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tabbrowser-tab[selected]:not([pinned]) .tab-content,
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tabbrowser-tab[selected]:not([pinned]) .tab-icon-stack {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]:not([expanded]) .tabbrowser-tab[selected]:not([pinned]) .tab-content {
+  padding: 0 !important;
 }
 
 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-background {
@@ -218,6 +242,33 @@
   --button-background-color-active: #61666f !important;
   --button-background-color-ghost-hover: #555a62 !important;
   --button-background-color-ghost-active: #61666f !important;
+}
+
+.actions-list > moz-button,
+.actions-list > moz-button .button-background {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.actions-list > moz-button .button-background {
+  position: relative !important;
+  width: var(--pf-toolbaritem-size) !important;
+  height: var(--pf-toolbaritem-size) !important;
+  padding: 0 !important;
+}
+
+.actions-list > moz-button .button-background > img,
+.actions-list > moz-button .button-background > .button-icon,
+.actions-list > moz-button .button-background > .toolbarbutton-icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+  object-fit: contain !important;
 }
 
 #window-modal-dialog button[part="dialog-button"] {
