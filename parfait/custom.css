@@ -271,19 +271,6 @@
   object-fit: contain !important;
 }
 
-#window-modal-dialog button[part="dialog-button"] {
-  color: #fff !important;
-}
-
-#window-modal-dialog button[part="dialog-button"]:not([default]) {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-#window-modal-dialog button[part="dialog-button"][default] {
-  color: #111318 !important;
-  background-color: #d2d6dc !important;
-}
-
 #tabbrowser-tabbox,
 #tabbrowser-tabpanels,
 #tabbrowser-tabpanels .browserStack,
