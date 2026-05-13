@@ -1,0 +1,150 @@
+:root {
+  /*
+    Workspace overrides for Parfait.
+    Keep upstream files untouched and tweak the theme here.
+  */
+
+  /* overall look */
+  --pf-accent-color: #f0a6be;
+  --pf-browser-opacity: 88%;
+  --pf-browser-contrast: 18%;
+
+  /* shape */
+  --pf-border-radius-md: 18px;
+  --pf-border-radius-sm: 12px;
+  --pf-browser-radius: 16px;
+  --pf-window-radius: 20px;
+  --pf-urlbar-fl-radius: 18px;
+  --pf-urlbar-sr-radius: 12px;
+
+  /* layout */
+  --pf-sidebar-width: 252px;
+  --pf-sidebar-bgcolor: rgba(244, 234, 241, 0.9);
+  --pf-toolbar-bgcolor: rgba(255, 255, 255, 0.18);
+  --pf-toolbar-bgcolor-hover: rgba(255, 255, 255, 0.26);
+  --pf-toolbar-bgcolor-active: rgba(255, 255, 255, 0.34);
+  --pf-toolbar-bgcolor-inactive: rgba(255, 255, 255, 0.12);
+  --pf-tab-selected-bgcolor: rgba(255, 255, 255, 0.42);
+
+  /* softer shadows closer to the Parfait promo shots */
+  --pf-browser-shadow: 0 10px 30px rgba(83, 52, 69, 0.18);
+  --pf-shadow-lg: 0 10px 20px rgba(52, 35, 45, 0.08), 0 24px 48px rgba(52, 35, 45, 0.14);
+
+  /*
+    Uncomment these if you want a soft gradient background.
+
+    --pf-bg-gradient-1: #f0a6be;
+    --pf-bg-gradient-2: #9f6d82;
+  */
+}
+
+/*
+  ESR-specific polish
+  Keep these fixes here so upstream Parfait stays easy to update.
+*/
+
+/* Keep favicon and close button clipped inside the vertical tab pill. */
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-stack,
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-content,
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-background {
+  overflow: clip !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-content {
+  padding-inline-start: 10px !important;
+  padding-inline-end: 8px !important;
+  gap: 8px !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-icon-stack {
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  min-width: 16px !important;
+  width: 16px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex: 0 0 16px !important;
+  position: relative;
+  inset: auto !important;
+  transform: none !important;
+  z-index: 1;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-icon-image {
+  margin: 0 !important;
+  inset: auto !important;
+  transform: none !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-close-button {
+  position: relative;
+  inset: auto !important;
+  transform: none !important;
+  z-index: 1;
+}
+
+/* Make the floating Arc-like command palette sit above page content. */
+#urlbar[open] {
+  z-index: 9999 !important;
+  --background-color-overlay: rgba(28, 29, 33, 0.98) !important;
+  --toolbar-field-focus-background-color: rgba(28, 29, 33, 0.98) !important;
+}
+
+#urlbar[open] .urlbar-background {
+  background-color: rgba(28, 29, 33, 0.96) !important;
+  backdrop-filter: none !important;
+}
+
+#urlbar[open] .urlbarView,
+#urlbar[open] .urlbarView-body-outer,
+#urlbar[open] .urlbarView-body-inner,
+#urlbar[open] .urlbarView-results,
+#urlbar[open] .search-one-offs,
+#urlbar[open] .urlbarView-row,
+#urlbar[open] .urlbarView-row-inner {
+  background-color: rgba(28, 29, 33, 0.98) !important;
+}
+
+#urlbar[open] .urlbarView-body-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Visual pass to move ESR closer to the repo screenshots. */
+#sidebar-main {
+  background: color-mix(in srgb, var(--pf-sidebar-bgcolor), white 8%) !important;
+  box-shadow: var(--pf-browser-shadow) !important;
+}
+
+#tabbrowser-tabbox,
+#tabbrowser-tabpanels,
+#tabbrowser-tabpanels .browserStack,
+#tabbrowser-tabpanels browser,
+#tabbrowser-tabpanels .tabpanel-subview-body {
+  border-radius: var(--pf-browser-radius) !important;
+}
+
+#urlbar:not([open]) .urlbar-background {
+  border-radius: calc(var(--pf-browser-radius) - 2px) !important;
+}
+
+@-moz-document url(about:newtab), url(about:home) {
+  :root {
+    --newtab-background-color: #2f2e39 !important;
+    --newtab-background-color-secondary: rgba(255, 255, 255, 0.1) !important;
+    --newtab-border-color: rgba(255, 255, 255, 0.08) !important;
+    --border-radius-medium: 18px !important;
+    --border-radius-small: 12px !important;
+  }
+
+  .search-handoff-button {
+    min-height: 68px !important;
+    background: rgba(255, 255, 255, 0.09) !important;
+    border-radius: 18px !important;
+    box-shadow: none !important;
+  }
+
+  .logo-and-wordmark {
+    margin-bottom: 18px !important;
+  }
+}
