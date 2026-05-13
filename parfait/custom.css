@@ -5,7 +5,7 @@
   */
 
   /* overall look */
-  --pf-accent-color: #f0a6be;
+  --pf-accent-color: #4a4f57;
   --pf-browser-opacity: 88%;
   --pf-browser-contrast: 18%;
 
@@ -18,17 +18,18 @@
   --pf-urlbar-sr-radius: 12px;
 
   /* layout */
-  --pf-sidebar-width: 252px;
-  --pf-sidebar-bgcolor: rgba(244, 234, 241, 0.9);
-  --pf-toolbar-bgcolor: rgba(255, 255, 255, 0.18);
-  --pf-toolbar-bgcolor-hover: rgba(255, 255, 255, 0.26);
-  --pf-toolbar-bgcolor-active: rgba(255, 255, 255, 0.34);
-  --pf-toolbar-bgcolor-inactive: rgba(255, 255, 255, 0.12);
-  --pf-tab-selected-bgcolor: rgba(255, 255, 255, 0.42);
+  --pf-sidebar-width: 288px;
+  --pf-sidebar-bgcolor: #4a4e56;
+  --pf-toolbar-bgcolor: rgba(255, 255, 255, 0.12);
+  --pf-toolbar-bgcolor-hover: rgba(255, 255, 255, 0.18);
+  --pf-toolbar-bgcolor-active: rgba(255, 255, 255, 0.24);
+  --pf-toolbar-bgcolor-inactive: rgba(255, 255, 255, 0.08);
+  --pf-tab-selected-bgcolor: #9fa4ab;
 
   /* softer shadows closer to the Parfait promo shots */
   --pf-browser-shadow: 0 10px 30px rgba(83, 52, 69, 0.18);
   --pf-shadow-lg: 0 10px 20px rgba(52, 35, 45, 0.08), 0 24px 48px rgba(52, 35, 45, 0.14);
+  --pf-tab-selected-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 6px 14px rgba(28, 31, 37, 0.2);
 
   /*
     Uncomment these if you want a soft gradient background.
@@ -51,9 +52,9 @@
 }
 
 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-content {
-  padding-inline-start: 10px !important;
-  padding-inline-end: 8px !important;
-  gap: 8px !important;
+  padding-inline-start: 14px !important;
+  padding-inline-end: 12px !important;
+  gap: 10px !important;
 }
 
 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([pinned]) .tab-icon-stack {
@@ -83,6 +84,21 @@
   z-index: 1;
 }
 
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-background {
+  background-color: var(--pf-tab-selected-bgcolor) !important;
+  box-shadow: var(--pf-tab-selected-shadow) !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-content {
+  color: #fff !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-label,
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-icon-image,
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] .tab-close-button {
+  opacity: 1 !important;
+}
+
 /* Make the floating Arc-like command palette sit above page content. */
 #urlbar[open] {
   z-index: 9999 !important;
@@ -110,10 +126,86 @@
   z-index: 1;
 }
 
+#urlbar[open] .urlbarView-row {
+  border-radius: 14px !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease !important;
+}
+
+#urlbar[open] .urlbarView-row:hover,
+#urlbar[open] .urlbarView-row[selected] {
+  background-color: rgba(78, 82, 90, 0.82) !important;
+  box-shadow: inset 0 0 0 1px rgba(146, 151, 161, 0.32) !important;
+}
+
+#urlbar[open] .urlbarView-row:hover .urlbarView-row-inner,
+#urlbar[open] .urlbarView-row[selected] .urlbarView-row-inner {
+  background-color: transparent !important;
+}
+
+#urlbar[open] .urlbarView-row[selected] {
+  outline: 1px solid rgba(188, 193, 201, 0.32) !important;
+  outline-offset: -1px !important;
+}
+
+#urlbar[open] .urlbarView-row[selected] .urlbarView-title,
+#urlbar[open] .urlbarView-row[selected] .urlbarView-action,
+#urlbar[open] .urlbarView-row[selected] .urlbarView-url,
+#urlbar[open] .urlbarView-row:hover .urlbarView-title,
+#urlbar[open] .urlbarView-row:hover .urlbarView-action,
+#urlbar[open] .urlbarView-row:hover .urlbarView-url {
+  color: #fff !important;
+}
+
+/* Give the sidebar hover preview some breathing room from the tab rail. */
+@media -moz-pref("sidebar.verticalTabs") and -moz-pref("parfait.toolbar.unified-sidebar") {
+  #link-preview-panel {
+    margin-inline-start: 10px !important;
+  }
+
+  #vertical-tabs-newtab-button::before,
+  #tabs-newtab-button::before {
+    border-top: 1px dashed rgba(18, 20, 24, 0.28) !important;
+  }
+}
+
 /* Visual pass to move ESR closer to the repo screenshots. */
 #sidebar-main {
-  background: color-mix(in srgb, var(--pf-sidebar-bgcolor), white 8%) !important;
+  background: var(--pf-sidebar-bgcolor) !important;
   box-shadow: var(--pf-browser-shadow) !important;
+}
+
+#nav-bar,
+#nav-bar-customization-target,
+#vertical-spacer,
+#sidebar-main,
+#tabbrowser-tabs[orient="vertical"],
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab,
+#tabbrowser-tabs[orient="vertical"] .tab-background {
+  background-color: var(--pf-sidebar-bgcolor) !important;
+}
+
+#sidebar-main toolbarbutton,
+#sidebar-main .button-background,
+#nav-bar toolbarbutton:not(#urlbar-container *),
+#nav-bar-customization-target > :is(toolbarbutton, toolbaritem):not(#urlbar-container) {
+  --button-background-color: var(--pf-sidebar-bgcolor) !important;
+  --button-background-color-hover: #555a62 !important;
+  --button-background-color-active: #61666f !important;
+  --button-background-color-ghost-hover: #555a62 !important;
+  --button-background-color-ghost-active: #61666f !important;
+}
+
+#window-modal-dialog button[part="dialog-button"] {
+  color: #fff !important;
+}
+
+#window-modal-dialog button[part="dialog-button"]:not([default]) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+#window-modal-dialog button[part="dialog-button"][default] {
+  color: #111318 !important;
+  background-color: #d2d6dc !important;
 }
 
 #tabbrowser-tabbox,
